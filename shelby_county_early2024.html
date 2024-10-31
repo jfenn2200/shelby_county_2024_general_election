@@ -7514,12 +7514,14 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [173]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tabula</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">from</span> <span class="nn">folium.plugins</span> <span class="kn">import</span> <span class="n">HeatMap</span>
 
 
 <span class="c1">#Data through October 24th, 2024</span>
@@ -7528,7 +7530,7 @@ a.anchor-link {
 <span class="n">statewide_2016</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'shelby_2016.csv'</span><span class="p">)</span> <span class="c1">#original located https://tnsos.org/elections/ElectionData/20161108EarlyVotersDisplay.php?All</span>
 <span class="n">shelby_reg_voters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">'October 2024 Stat File Final.xlsx'</span><span class="p">)</span> <span class="c1">#original https://www.electionsshelbytn.gov/sites/default/files/documents/scec/vrstatistics/October%202024%20Stat%20File%20Final.xlsx</span>
 <span class="n">ev_location_2024</span> <span class="o">=</span> <span class="n">tabula</span><span class="o">.</span><span class="n">read_pdf</span><span class="p">(</span><span class="s1">'Daily Report for Web through Oct 30.pdf'</span><span class="p">,</span> <span class="n">pages</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pandas_options</span><span class="o">=</span><span class="p">{</span><span class="s1">'header'</span><span class="p">:</span> <span class="kc">None</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#original https://www.electionsshelbytn.gov/sites/default/files/documents/Daily%20Report%20for%20Web%20through%20Oct%2030.pdf</span>
-
+<span class="n">ev_location_gis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'shelby_location_gis.csv'</span><span class="p">)</span>
 
 <span class="n">ev_location_2024</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'0'</span>
 <span class="n">data_col_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span>
@@ -7673,31 +7675,31 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_23444/153344242.py:36: SettingWithCopyWarning: 
+<pre>/tmp/ipykernel_17213/2421087147.py:38: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   shelby_2016['Day'] = list(range(len(shelby_2016)))
-/tmp/ipykernel_23444/153344242.py:40: SettingWithCopyWarning: 
+/tmp/ipykernel_17213/2421087147.py:42: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   shelby_2020['Day'] = list(range(len(shelby_2020)))
-/tmp/ipykernel_23444/153344242.py:44: SettingWithCopyWarning: 
+/tmp/ipykernel_17213/2421087147.py:46: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   shelby_2024['Day'] = list(range(len(shelby_2024)))
-/tmp/ipykernel_23444/153344242.py:45: SettingWithCopyWarning: 
+/tmp/ipykernel_17213/2421087147.py:47: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   shelby_2024['Registered Voters'] = shelby_reg_voters.loc[336, 'Total Voters']
-/tmp/ipykernel_23444/153344242.py:46: SettingWithCopyWarning: 
+/tmp/ipykernel_17213/2421087147.py:48: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -7969,7 +7971,138 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c4c9ad84-8cbe-4258-96a8-3352c638e968">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c4c9ad84-8cbe-4258-96a8-3352c638e968">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ev_location_2024</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ev_location_gis</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span>
+<span class="n">ev_location_2024</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ev_location_gis</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span>
+<span class="n">ev_location_2024</span> <span class="o">=</span> <span class="n">ev_location_2024</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#print(ev_location_2024)</span>
+
+<span class="n">max_amount</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ev_location_2024</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span> <span class="s1">'Total'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="n">hmap</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">35.117500</span><span class="p">,</span> <span class="o">-</span><span class="mf">89.971107</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="p">)</span>
+
+<span class="n">hm_wide</span> <span class="o">=</span> <span class="n">HeatMap</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ev_location_2024</span><span class="o">.</span><span class="n">Latitude</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ev_location_2024</span><span class="o">.</span><span class="n">Longitude</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ev_location_2024</span><span class="o">.</span><span class="n">Total</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))),</span>
+                  <span class="n">min_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                  <span class="n">max_val</span><span class="o">=</span><span class="n">max_amount</span><span class="p">,</span>
+                  <span class="n">radius</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">blur</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                  <span class="n">max_zoom</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                  <span class="p">)</span>
+
+<span class="n">hmap</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">hm_wide</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>/tmp/ipykernel_17213/3966586309.py:10: UserWarning: The `max_val` parameter is no longer necessary. The largest intensity is calculated automatically.
+  hm_wide = HeatMap( list(zip(ev_location_2024.Latitude.values, ev_location_2024.Longitude.values, ev_location_2024.Total.values.astype(float))),
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe allowfullscreen="" mozallowfullscreen="" srcdoc='&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"&gt;&lt;/script&gt;
+    &lt;script src="https://code.jquery.com/jquery-3.7.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/&gt;
+    &lt;link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/&gt;
+    
+            &lt;meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /&gt;
+            &lt;style&gt;
+                #map_c8d1b03d381a3d18cc1c7006223ef182 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+    &lt;script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class="folium-map" id="map_c8d1b03d381a3d18cc1c7006223ef182" &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_c8d1b03d381a3d18cc1c7006223ef182 = L.map(
+                "map_c8d1b03d381a3d18cc1c7006223ef182",
+                {
+                    center: [35.1175, -89.971107],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_4a653a92189a59278f75d97f60646a5c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_4a653a92189a59278f75d97f60646a5c.addTo(map_c8d1b03d381a3d18cc1c7006223ef182);
+        
+    
+            var heat_map_164a6360e03983f5c92be355dd6fc3b2 = L.heatLayer(
+                [[35.02177770000001, -90.0112214, 8228.0], [35.0420617, -89.8318767, 13002.0], [35.2848139, -89.6683595, 7649.0], [35.342839, -89.8965037, 8377.0], [35.1776443, -89.790309, 13028.0], [35.073703, -89.68078659999999, 12561.0], [35.0536302, -89.73317639999999, 13497.0], [35.166653, -90.0263653, 3952.0], [35.2056708, -90.0045567, 4074.0], [35.1613802, -89.9196066, 3864.0], [35.11501150000001, -90.0012366, 6393.0], [35.1395167, -89.98188479999999, 9019.0], [35.0626406, -89.89796120000001, 7474.0], [35.2291333, -89.83853289999999, 16331.0], [35.248815, -89.7472344, 3750.0], [35.1412447, -90.02048669999999, 8941.0], [35.1590141, -89.7090844, 6829.0], [35.1080336, -90.06044539999999, 5371.0], [35.0814367, -89.80236029999999, 2696.0], [35.2158475, -89.9167524, 16436.0], [35.0508814, -90.0607007, 9126.0], [35.131999, -89.9063393, 6524.0], [35.1494478, -90.0490457, 14364.0], [35.0545176, -90.0153029, 4029.0], [35.14287729999999, -89.7982313, 9599.0], [35.1016952, -89.9024462, 11391.0], [0.0, 0.0, 1683.0], [0.0, 0.0, 7261.0], [0.0, 0.0, 0.0]],
+                {"blur": 15, "maxZoom": 1, "minOpacity": 0.2, "radius": 17}
+            );
+        
+    
+            heat_map_164a6360e03983f5c92be355dd6fc3b2.addTo(map_c8d1b03d381a3d18cc1c7006223ef182);
+        
+&lt;/script&gt;
+&lt;/html&gt;' style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" webkitallowfullscreen=""></iframe></div></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f59e287e-7595-4716-b25d-ce45098a2a40">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
